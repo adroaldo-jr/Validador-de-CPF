@@ -1,5 +1,7 @@
 while True:
     cpf = input('Digite um CPF (somente números): ').strip()
+    
+    # Faz os cálculos para validar o CPF
     novoCpf = cpf[:-2]
     reverso = 10
     total = 0
@@ -19,13 +21,26 @@ while True:
             total = 0
             novoCpf += str(digito)
 
-    if cpf == novoCpf:
+    # Verifica se o cpf inserido não é apenas sequência de um único número
+    sequencia = novoCpf == str(novoCpf[0]) * len(cpf)
+
+    # Verifica se o resultado é válido ou inválido
+    if cpf == novoCpf and not sequencia:
         print('Válido')
     else:
         print('Inválido')
 
+    # Verifica se o programa deve continuar rodando
     continuar = input('Deseja validar outro CPF? [S/N] ').strip().upper()
-    if continuar == 'S':
-        continue
-    else:
-        quit()
+    try:
+        if continuar == 'S':
+            continue
+        else:
+            quit()
+    except:
+        while continuar not in 'SN':
+            continuar = input('Deseja validar outro CPF? [S/N] ').strip().upper()
+        if continuar == 'S':
+            continue
+        else:
+            quit()
